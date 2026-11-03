@@ -8,3 +8,9 @@ dependencies = [
     "fastmcp>=4.1.5",
     "msgpack>=1.1.0",
 ]
+
+[tool.setuptools]
+py-modules = ["souyun_mcp"]
+
+[project.scripts]
+souyun-mcp = "souyun_mcp:main"
