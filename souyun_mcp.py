@@ -79,12 +79,16 @@ def _collect_lyrics_material(
     type_: str | None = None,
 ) -> dict[str, Any]:
     poems = _search_poems(theme, scope="All", dynasty=dynasty, type_=type_, pageno=0)
-    poem_rows = (poems.get("ShiData") or [])[:top_n]
+    poem_rows = (
+        (poems.get("ShiData") or []) if isinstance(poems, dict) else []
+    )[:top_n]
 
     candidate_poems = []
     candidate_lines = []
     rhyme_count: dict[str, int] = {}
     for poem in poem_rows:
+        if not isinstance(poem, dict):
+            continue
         candidate_poems.append(
             {
                 "id": poem.get("Id"),
