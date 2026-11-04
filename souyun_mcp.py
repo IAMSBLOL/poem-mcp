@@ -79,9 +79,9 @@ def _collect_lyrics_material(
     type_: str | None = None,
 ) -> dict[str, Any]:
     poems = _search_poems(theme, scope="All", dynasty=dynasty, type_=type_, pageno=0)
-    poem_rows = (
-        (poems.get("ShiData") or []) if isinstance(poems, dict) else []
-    )[:top_n]
+    poem_rows = ((poems.get("ShiData") or []) if isinstance(poems, dict) else [])[
+        :top_n
+    ]
 
     candidate_poems = []
     candidate_lines = []
@@ -172,8 +172,16 @@ def collect_lyrics_material(
     return _collect_lyrics_material(theme, top_n, rhyme_char, dynasty, type_)
 
 
+# def main() -> None:
+#     mcp.run(transport="stdio")
+
+
 def main() -> None:
-    mcp.run(transport="stdio")
+    mcp.run(
+        transport="http",
+        host="0.0.0.0",
+        port=8000,
+    )
 
 
 if __name__ == "__main__":
